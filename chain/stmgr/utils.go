@@ -4,6 +4,7 @@ import (
 	"bytes"
 	"context"
 	"fmt"
+	"math"
 	"os"
 	"reflect"
 	"runtime"
@@ -257,7 +258,7 @@ func GetSectorsForWinningPoSt(ctx context.Context, pv ffiwrapper.Verifier, sm *S
 		return nil, xerrors.Errorf("generating winning post challenges: %w", err)
 	}
 
-	sectors, err := provingSectors.All(miner.SectorsMax)
+	sectors, err := provingSectors.All(math.MaxInt64)
 	if err != nil {
 		return nil, xerrors.Errorf("failed to enumerate all sector IDs: %w", err)
 	}
