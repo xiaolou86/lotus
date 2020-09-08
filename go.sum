@@ -250,6 +250,10 @@ github.com/filecoin-project/go-fil-markets v0.5.6-0.20200814234959-80b1788108ac/
 github.com/filecoin-project/go-fil-markets v0.5.10-0.20200907054005-9945d0d2141a/go.mod h1:w0wCAf/fT7UfvJAZEMjjCQfsbwvrdjU4sN4QFLWsPrk=
 github.com/filecoin-project/go-fil-markets v0.6.0 h1:gfxMweUHo4u+2BZh2Q7/7+cV0/ttikuJfhkkxLRsE2Q=
 github.com/filecoin-project/go-fil-markets v0.6.0/go.mod h1:LhSFYLkjaoe0vFRKABGYyw1Jz+9jCpF1sPA7yOftLTw=
+github.com/filecoin-project/go-hamt-ipld v0.1.3 h1:CfHEyx0cYO3NP91yExqD3xxqbb/Ale+vHQZOyqQGfxk=
+github.com/filecoin-project/go-hamt-ipld v0.1.3/go.mod h1:REjlnb1+pe+fM8Q1OMt2fPZXn0KxWqJ4S7ZeS+2IksQ=
+github.com/filecoin-project/go-hamt-ipld/v2 v2.0.0 h1:b3UDemBYN2HNfk3KOXNuxgTTxlWi3xVvbQP0IT38fvM=
+github.com/filecoin-project/go-hamt-ipld/v2 v2.0.0/go.mod h1:7aWZdaQ1b16BVoQUYR+eEvrDCGJoPLxFpDynFjYfBjI=
 github.com/filecoin-project/go-jsonrpc v0.1.2-0.20200817153016-2ea5cbaf5ec0/go.mod h1:XBBpuKIMaXIIzeqzO1iucq4GvbF8CxmXRFoezRh+Cx4=
 github.com/filecoin-project/go-jsonrpc v0.1.2-0.20200822201400-474f4fdccc52 h1:FXtCp0ybqdQL9knb3OGDpkNTaBbPxgkqPeWKotUwkH0=
 github.com/filecoin-project/go-jsonrpc v0.1.2-0.20200822201400-474f4fdccc52/go.mod h1:XBBpuKIMaXIIzeqzO1iucq4GvbF8CxmXRFoezRh+Cx4=
@@ -266,6 +270,8 @@ github.com/filecoin-project/go-state-types v0.0.0-20200903145444-247639ffa6ad/go
 github.com/filecoin-project/go-state-types v0.0.0-20200904021452-1883f36ca2f4/go.mod h1:IQ0MBPnonv35CJHtWSN3YY1Hz2gkPru1Q9qoaYLxx9I=
 github.com/filecoin-project/go-state-types v0.0.0-20200905071437-95828685f9df h1:m2esXSuGBkuXlRyCsl1a/7/FkFam63o1OzIgzaHtOfI=
 github.com/filecoin-project/go-state-types v0.0.0-20200905071437-95828685f9df/go.mod h1:IQ0MBPnonv35CJHtWSN3YY1Hz2gkPru1Q9qoaYLxx9I=
+github.com/filecoin-project/go-state-types v0.0.0-20200908000712-3ca0d2890090 h1:oFANhMdKCWXMeAUVO78oPoSpwOFVil4wvaNmpMk1agE=
+github.com/filecoin-project/go-state-types v0.0.0-20200908000712-3ca0d2890090/go.mod h1:IQ0MBPnonv35CJHtWSN3YY1Hz2gkPru1Q9qoaYLxx9I=
 github.com/filecoin-project/go-statemachine v0.0.0-20200226041606-2074af6d51d9/go.mod h1:FGwQgZAt2Gh5mjlwJUlVB62JeYdo+if0xWxSEfBD9ig=
 github.com/filecoin-project/go-statemachine v0.0.0-20200714194326-a77c3ae20989/go.mod h1:FGwQgZAt2Gh5mjlwJUlVB62JeYdo+if0xWxSEfBD9ig=
 github.com/filecoin-project/go-statemachine v0.0.0-20200813232949-df9b130df370 h1:Jbburj7Ih2iaJ/o5Q9A+EAeTabME6YII7FLi9SKUf5c=
@@ -291,6 +297,8 @@ github.com/filecoin-project/specs-actors v0.9.4/go.mod h1:BStZQzx5x7TmCkLv0Bpa07
 github.com/filecoin-project/specs-actors v0.9.6/go.mod h1:wM2z+kwqYgXn5Z7scV1YHLyd1Q1cy0R8HfTIWQ0BFGU=
 github.com/filecoin-project/specs-actors v0.9.7 h1:7PAZ8kdqwBdmgf/23FCkQZLCXcVu02XJrkpkhBikiA8=
 github.com/filecoin-project/specs-actors v0.9.7/go.mod h1:wM2z+kwqYgXn5Z7scV1YHLyd1Q1cy0R8HfTIWQ0BFGU=
+github.com/filecoin-project/specs-actors/v2 v2.0.0-20200908140851-99e4bc18d820 h1:BlNIUR9Jz2mdGKhWG+LTLUVKn+CU1I8QYW+ALtOoME8=
+github.com/filecoin-project/specs-actors/v2 v2.0.0-20200908140851-99e4bc18d820/go.mod h1:ayEaLOyuapdGvSfkoF3nPC33+Y8P10EWLvM5/7cIT/g=
 github.com/filecoin-project/specs-storage v0.1.1-0.20200622113353-88a9704877ea/go.mod h1:Pr5ntAaxsh+sLG/LYiL4tKzvA83Vk5vLODYhfNwOg7k=
 github.com/filecoin-project/specs-storage v0.1.1-0.20200730063404-f7db367e9401/go.mod h1:Pr5ntAaxsh+sLG/LYiL4tKzvA83Vk5vLODYhfNwOg7k=
 github.com/filecoin-project/specs-storage v0.1.1-0.20200907031224-ed2e5cd13796 h1:dJsTPWpG2pcTeojO2pyn0c6l+x/3MZYCBgo/9d11JEk=
@@ -1429,6 +1437,7 @@ github.com/whyrusleeping/cbor-gen v0.0.0-20200504204219-64967432584d/go.mod h1:W
 github.com/whyrusleeping/cbor-gen v0.0.0-20200710004633-5379fc63235d/go.mod h1:fgkXqYy7bV2cFeIEOkVTZS/WjXARfBqSH6Q2qHL33hQ=
 github.com/whyrusleeping/cbor-gen v0.0.0-20200715143311-227fab5a2377/go.mod h1:fgkXqYy7bV2cFeIEOkVTZS/WjXARfBqSH6Q2qHL33hQ=
 github.com/whyrusleeping/cbor-gen v0.0.0-20200723185710-6a3894a6352b/go.mod h1:fgkXqYy7bV2cFeIEOkVTZS/WjXARfBqSH6Q2qHL33hQ=
+github.com/whyrusleeping/cbor-gen v0.0.0-20200806213330-63aa96ca5488/go.mod h1:fgkXqYy7bV2cFeIEOkVTZS/WjXARfBqSH6Q2qHL33hQ=
 github.com/whyrusleeping/cbor-gen v0.0.0-20200810223238-211df3b9e24c/go.mod h1:fgkXqYy7bV2cFeIEOkVTZS/WjXARfBqSH6Q2qHL33hQ=
 github.com/whyrusleeping/cbor-gen v0.0.0-20200812213548-958ddffe352c/go.mod h1:fgkXqYy7bV2cFeIEOkVTZS/WjXARfBqSH6Q2qHL33hQ=
 github.com/whyrusleeping/cbor-gen v0.0.0-20200814224545-656e08ce49ee h1:U7zWWvvAjT76EiuWPSOiZlQDnaQYPxPoxugTtTAcJK0=

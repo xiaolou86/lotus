@@ -41,7 +41,7 @@ var log = logging.Logger("vm")
 var actorLog = logging.Logger("actors")
 var gasOnActorExec = newGasCharge("OnActorExec", 0, 0)
 
-// ResolveToKeyAddr returns the public key type of address (`BLS`/`SECP256K1`) of an account actor identified by `addr`.
+// ResolveToKeyAddr returns the pusblic key type of address (`BLS`/`SECP256K1`) of an account actor identified by `addr`.
 func ResolveToKeyAddr(state types.StateTree, cst cbor.IpldStore, addr address.Address) (address.Address, error) {
 	if addr.Protocol() == address.BLS || addr.Protocol() == address.SECP256K1 {
 		return addr, nil
