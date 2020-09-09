@@ -124,7 +124,11 @@ func (rt *Runtime) shimCall(f func() interface{}) (rval []byte, aerr aerrors.Act
 			//log.Desugar().WithOptions(zap.AddStacktrace(zapcore.ErrorLevel)).
 			//Sugar().Errorf("spec actors failure: %s", r)
 			log.Errorf("spec actors failure: %s", r)
-			aerr = aerrors.Newf(1, "spec actors failure: %s", r)
+			// If an actor implementation panics directly (rather than calling Abortf) then the evaluation is undefined.
+			// There is no exit code corresponding to this. The result should not go on chain. A panic (which could also
+			// come from some actor dependency) may indicate a transient state or error that cannot be replicated by
+			// other nodes and thus cannot form part of consensus. E.g. an out-of-memory.
+			aerr = aerrors.Fatalf("spec actors failure: %s", r)
 		}
 	}()
 
