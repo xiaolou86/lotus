@@ -18,6 +18,7 @@ import (
 	"github.com/filecoin-project/specs-actors/actors/builtin"
 	"github.com/filecoin-project/specs-actors/actors/builtin/account"
 	"github.com/filecoin-project/specs-actors/actors/builtin/paych"
+	"github.com/filecoin-project/specs-actors/actors/util/adt"
 	"golang.org/x/xerrors"
 )
 
@@ -189,7 +190,7 @@ func (ca *channelAccessor) checkVoucherValidUnlocked(ctx context.Context, ch add
 	}
 
 	// Check the voucher against the highest known voucher nonce / value
-	laneStates, err := ca.laneState(ch)
+	laneStates, err := ca.laneState(ctx, pchState, ch)
 	if err != nil {
 		return nil, err
 	}
@@ -482,17 +483,34 @@ func (ca *channelAccessor) listVouchers(ctx context.Context, ch address.Address)
 
 // laneState gets the LaneStates from chain, then applies all vouchers in
 // the data store over the chain state
-func (ca *channelAccessor) laneState(ch address.Address) (map[uint64]*paych.LaneState, error) {
-	// Apply locally stored vouchers
-	vouchers, err := ca.store.VouchersForPaych(ch)
-	if err != nil && err != ErrChannelNotTracked {
+func (ca *channelAccessor) laneState(ctx context.Context, state *paych.State, ch address.Address) (map[uint64]*paych.LaneState, error) {
+	// Get the lane state from the chain
+	store := ca.api.AdtStore(ctx)
+	lsamt, err := adt.AsArray(store, state.LaneStates)
+	if err != nil {
 		return nil, err
 	}
 
 	// Note: we use a map instead of an array to store laneStates because the
 	// client sets the lane ID (the index) and potentially they could use a
 	// very large index.
-	laneStates := make(map[uint64]*paych.LaneState, len(vouchers))
+	var ls paych.LaneState
+	laneStates := make(map[uint64]*paych.LaneState, lsamt.Length())
+	err = lsamt.ForEach(&ls, func(i int64) error {
+		current := ls
+		laneStates[uint64(i)] = &current
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+
+	// Apply locally stored vouchers
+	vouchers, err := ca.store.VouchersForPaych(ch)
+	if err != nil && err != ErrChannelNotTracked {
+		return nil, err
+	}
+
 	for _, v := range vouchers {
 		for range v.Voucher.Merges {
 			return nil, xerrors.Errorf("paych merges not handled yet")
