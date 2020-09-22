@@ -3,6 +3,7 @@ package full
 import (
 	"context"
 	"encoding/json"
+	"github.com/filecoin-project/go-state-types/abi"
 
 	"github.com/filecoin-project/go-address"
 	"github.com/ipfs/go-cid"
@@ -171,6 +172,55 @@ again:
 	}
 	return m, err
 }
+
+func (a *MpoolAPI) 	MpoolReplaceMessage(ctx context.Context, from address.Address, nonce uint64, gaslimit int64, gasfeecap abi.TokenAmount, gaspremium abi.TokenAmount)(*types.SignedMessage, error) {
+
+	pendingMpool, _ := a.Mpool.Pending()
+
+	var currentSignedMessage *types.SignedMessage
+	for _, pendingMessage := range pendingMpool {
+		if pendingMessage.Message.From == from && pendingMessage.Message.Nonce == nonce {
+			currentSignedMessage = pendingMessage
+			break
+		}
+	}
+
+	if currentSignedMessage == nil {
+		return nil, xerrors.Errorf("mpool replace message: no pending message found from %s with nonce %d.", from, nonce);
+	}
+
+	newMessage := currentSignedMessage.Message
+
+	if gaspremium.Nil() {
+		gasPremiumEst, err := a.GasEstimateGasPremium(ctx, 2, from, gaslimit, types.TipSetKey{})
+		if err != nil {
+			return nil, xerrors.Errorf("mpool replace message failed to re-estimat gas price: %w", err)
+		}
+		newMessage.GasPremium = gasPremiumEst
+	} else {
+		newMessage.GasPremium = gaspremium
+	}
+
+	if gasfeecap.Nil() {
+		gasFeeCapEst, err := a.GasEstimateFeeCap(ctx, &newMessage, 20, types.EmptyTSK)
+		if err != nil {
+			return nil, xerrors.Errorf("mpool replace message failed to re-estimate gas fee cap: %w", err)
+		}
+		newMessage.GasFeeCap = gasFeeCapEst
+	} else {
+		newMessage.GasFeeCap = gasfeecap
+	}
+
+	newMessage.GasLimit = gaslimit
+
+	signedNewMessage, err := a.WalletSignMessage(ctx, newMessage.From, &newMessage)
+	if err != nil {
+		return nil, xerrors.Errorf("mpool replace message failed to sign message: %w", err)
+	}
+
+	return signedNewMessage, err
+}
+
 
 func (a *MpoolAPI) MpoolGetNonce(ctx context.Context, addr address.Address) (uint64, error) {
 	return a.Mpool.GetNonce(addr)

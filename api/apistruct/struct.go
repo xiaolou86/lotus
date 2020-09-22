@@ -122,6 +122,7 @@ type FullNodeStruct struct {
 
 		MpoolPush        func(context.Context, *types.SignedMessage) (cid.Cid, error)                              `perm:"write"`
 		MpoolPushMessage func(context.Context, *types.Message, *api.MessageSendSpec) (*types.SignedMessage, error) `perm:"sign"`
+		MpoolReplaceMessage func(ctx context.Context, from address.Address, nonce uint64, gaslimit int64, gasfeecap abi.TokenAmount, gaspremium abi.TokenAmount) (*types.SignedMessage, error) `perm:sign`
 		MpoolGetNonce    func(context.Context, address.Address) (uint64, error)                                    `perm:"read"`
 		MpoolSub         func(context.Context) (<-chan api.MpoolUpdate, error)                                     `perm:"read"`
 
@@ -551,6 +552,10 @@ func (c *FullNodeStruct) MpoolPush(ctx context.Context, smsg *types.SignedMessag
 
 func (c *FullNodeStruct) MpoolPushMessage(ctx context.Context, msg *types.Message, spec *api.MessageSendSpec) (*types.SignedMessage, error) {
 	return c.Internal.MpoolPushMessage(ctx, msg, spec)
+}
+
+func (c *FullNodeStruct) MpoolReplaceMessage (ctx context.Context,  from address.Address, nonce uint64, gaslimit int64, gasfeecap abi.TokenAmount, gaspremium abi.TokenAmount) (*types.SignedMessage, error) {
+	return c.Internal.MpoolReplaceMessage(ctx, from, nonce, gaslimit, gasfeecap, gaspremium)
 }
 
 func (c *FullNodeStruct) MpoolSub(ctx context.Context) (<-chan api.MpoolUpdate, error) {
